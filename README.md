@@ -1,4 +1,4 @@
-This System is loading data and process from database on page Scroll.
+This System is loading and processing data from database on page Scroll.
 For Start This project
 
 1) Create Database tpois in mysql
