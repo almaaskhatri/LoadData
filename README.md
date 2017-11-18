@@ -1,5 +1,6 @@
-# loaddata-onscroll
+This System is loading data and process from database on page Scroll.
+For Start This project
 
-Dynamically load data on div scroll using php, mysql, jquery and ajax
-
-http://www.iamrohit.in/dynamically-load-data-on-div-scroll-using-php-mysql-jquery-and-ajax/
+1) Create Database tpois in mysql
+2) Import tpois.sql 
+This system works on scroll
