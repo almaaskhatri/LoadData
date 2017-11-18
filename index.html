@@ -1,0 +1,56 @@
+<style>
+.country { height: 80%; overflow: auto; width: 100%; }
+.loading { color: red; }
+li {font-size:24px;}
+#loading { display:none; color:red; font-size:30px; }
+</style>
+<div class="country">
+    <ul id="results"></ul>
+</div>
+ <span id="loading">Loading Please wait...</span>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(function() {
+   loadResults(0);
+    $('.country').scroll(function() {
+      if($("#loading").css('display') == 'none') {
+        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+           var limitStart = $("#results li").length;
+           loadResults(limitStart); 
+        }
+      }
+	}); 
+
+function loadResults(limitStart) {
+	$("#loading").show();
+    $.ajax({
+        url: "request.php",
+        type: "post",
+        dataType: "json",
+        data: {
+            limitStart: limitStart
+        },
+        success: function(data) {
+        
+
+               $.each(data, function(index, value) {
+             var start = new Date(value['ddate']),
+    end   = new Date(),
+    diff  = new Date(end - start),
+    days  = diff/1000/60/60/24;
+
+if(days>21)
+{
+                $("#results").append("<li id='"+index+"' style='color:red'>"+index +":,"+value['name']+":,"+ start+"</li>");
+
+             }
+            else{
+
+               $("#results").append("<li id='"+index+"' >"+index +":,"+value['name']+":,"+start+"</li>");
+}});
+             $("#loading").hide();     
+        }
+    });
+};
+});
+</script>
